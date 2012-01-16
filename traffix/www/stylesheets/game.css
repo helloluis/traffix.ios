@@ -1,0 +1,175 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body { line-height: 1; background:#000; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after,
+q:before, q:after { content: ''; content: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+
+h1, h2, p { color:#333; margin-bottom:0.5em;}
+h1 { font-size:64px; font-family: 'Fugaz One', Helvetica, sans-serif; letter-spacing:-2px; text-shadow:0 3px 8px #333; }
+h1.countdown { font-size:100px; }
+h2, h3, label, .bttn, #score, #high_score { font-size:24px; font-family: 'Boogaloo', Times, sans-serif; margin-bottom:20px; }
+p { line-height:1.5; font-family: 'Boogaloo', Times, sans-serif; }
+em { font-style:italic; }
+
+.screen { position:absolute; top:0; left:0; width:1024px; height:768px; display:none; overflow:hidden; /*background:#444 url(../images/bg.jpg);*/ }
+.screen_inner { position:absolute; top:10%; bottom:10%; left:10%; right:10%; width:80%; height:80%; }
+
+#loader.screen { background:#000; display:block; }
+#loader.screen h2.loading { margin-top:250px; text-align:center; color:#fff; font-size:48px; text-shadow:3px 3px 3px #000; }
+#loader.screen h2.loading_percentage { margin-top:0px; text-align:center; color:#fff; font-size:48px; text-shadow:3px 3px 3px #000; }
+#loading_cars { position:absolute; top:400px; left:0px; width:100%; height:30px; overflow:hidden; }
+#loading_cars img { position:absolute; height:20px; }
+#loading_container { width:0; height:0; display:block; overflow:hidden; visibility:hidden; }
+
+#intro { display:block; background:url(../images/loader.jpg) no-repeat; }
+#intro h1 { position:absolute; text-indent:-2000px; background:url(../images/traffix_logo.png) no-repeat; width:600px; height:250px; top: -50px; left: -60px; }
+a, #intro p strong { color:#fc0; }
+#intro section { border-top:1px solid #ccc; padding-top:20px; margin-top:25px; position:absolute; }
+#intro blockquote { font-size:18px; padding:10px 20px; }
+#intro h3 { padding:10px 0px 0px 0px; margin-bottom:0px; font-size:24px; }
+#intro .high_score_cont { position:absolute; top:380px; left:20px; color:#ff9; text-shadow:2px 2px 3px #000; }
+#intro .high_score_cont h3 { font-size:32px; }
+
+/* HELP */
+.help p { position:absolute; font-size:24px; line-height:1.3; width:350px; text-shadow:2px 2px 3px #000; color:#fff; top:200px; left:20px; }
+.help_illustration { position:absolute; right:-60px; top:-60px; width:350px; height:350px; -webkit-transform:rotate(10deg); background:#000; color:#fff; background:url(../images/bg_polaroid.png); z-index:5; cursor:pointer; }
+.help_illustration_intersection .stoplight, .help_illustration_frustration .stoplight { top:133px; left:163px; width:50px; height:50px; display:block; z-index:2; }
+.help_illustration .help_background { width: 270px; height:275px; position:absolute; background:url(../images/bg_help.jpg); top:39px; left:41px; z-index:1; overflow:hidden; }
+.help_illustration .overlay { z-index:5; opacity:0.4; background:#000; position:absolute; width:270px; height:275px; top:39px; left:41px; }
+.help_illustration.selected .overlay { opacity:0; }
+.help_illustration canvas { position:absolute; top:39px; left:41px; z-index:2; }
+.help_illustration_frustration { top:150px; right:120px; -webkit-transform:rotate(-5deg); z-index:4; }
+.help_illustration_frustration .frustration { position:absolute; width:40px; height:40px; background:url(../images/frustration_01.png); visibility:hidden; z-index:3; }
+.help_illustration_frustration .frustration.frustration02 { background:url(../images/frustration_02.png); }
+.help_illustration_frustration .frustration.frustration03 { background:url(../images/frustration_03.png); }
+.help_illustration_acceleration { top:350px; right:-80px; -webkit-transform:rotate(2deg); z-index:3; }
+.help_illustration_acceleration .help_background { background-image:url(../images/bg_help_acceleration.jpg); }
+.finger { background:url(../images/finger.png); width:40px; height:100px; position:absolute; z-index:3; visibility: hidden; display:block; }
+/*.finger.tapped { border:1px solid #ff0; }*/
+
+/* BUTTONS */
+.bttn { z-index:18; position:absolute; -webkit-tap-highlight-color: rgba(0,0,0,0) }
+#game .bttn, #game #score, #game .high_score { text-shadow:3px 3px 3px #000; }
+.bttn.start_game, .bttn.restart { position:absolute; height:35px; padding:10px; margin-top:10px; margin:0 auto; text-align:center; color:#fff; text-indent:-2000px; height:90px; font-size:30px; cursor:pointer; }
+.bttn.start_game { bottom:30px; left:10px; width:200px; background:url(../images/bttn_play.png) no-repeat 0 0; -webkit-transform:rotate(-1deg); }
+.bttn.restart { background:url(../images/bttn_again.png) no-repeat 0 0; text-indent:-2000px; width:296px; display:none; top:370px; left:350px; -webkit-transform:rotate(2deg); }
+.bttn.credits, .bttn.leaderboards { font-size:16px; }
+.bttn.credits { bottom:0px; left:20px; }
+.bttn.leaderboards { bottom:0px; left:180px; }
+.bttn.pause, .bttn.quit { top:20px; left :20px; color:#fff; }
+.bttn.quit { left: 100px; }
+.bttn.mute { bottom:20px; left:20px; color:#fff; }
+.bttn.disabled { opacity:0.5; }
+
+.barrier { position:absolute; background:#fff; width:20px; height:50%; display:block; visibility:hidden; }
+.barrier.vertical { width:50%; height:20px; }
+.barrier.vertical.right { bottom:-20px; left:50%; }
+.barrier.vertical.left { top:-20px; left:0px; }
+.barrier.horizontal.right { top:50%; left:-20px; }
+.barrier.horizontal.left { top:0; right:-20px; }
+
+#intro .examples { display:block; clear:both; overflow:hidden; margin-bottom:10px; margin-left:200px; }
+#intro h1, #intro h2 { text-align:center; }
+.bttn, .buttons li { cursor:pointer; }
+
+#messages { position:absolute; top:250px; left:150px; text-align:center; width:700px; height:120px; z-index:20; opacity : 1; display:none; font-size:48px; }
+#messages h1, #messages h2, #messages h3, #messages .countdown { color:#fff; text-shadow:3px 3px 6px #000; }
+#messages h2 { font-size:60px; }
+ 
+
+#score, #high_score { position:absolute; text-align:right; top:20px; right:20px; width:100px; height:50px; font-size:48px; color:#fff; z-index:20; }
+#score.higher_score { color:#ff0; }
+#score.good { color:#9c0; }
+#score.bad { color:#c00; }
+#high_score { font-size:24px; top:70px; right:25px; }
+
+#debugger { position:absolute; top :0px; left:0px; width:100%; height:30px; z-index:30; font-size:12px; color:#fff }
+
+#map, .neighborhood, .street, .buildings, .intersection { position:absolute; }
+#map { top:0px; left:0px; width:100%; height:100%; }
+.neighborhood, .buildings { top:0px; left:0px; background:url(../images/bg.jpg); width:100%; height:100%; }
+.buildings { top:0px; left:0px; background:url(../images/buildings.png); width:100%; height:100%; z-index:12; }
+.street{z-index:14; cursor:pointer;-webkit-tap-highlight-color: rgba(0,0,0,0)}
+.street.horizontal.lanes_4 { width:100%; height: 100px; }
+.street.horizontal.lanes_2 { width:100%; height: 50px; }
+.street.vertical.lanes_2 { width:50px; height: 100%; }
+.street.vertical.lanes_4 { width:100px; height: 100%; }
+.street .side { position:absolute; top:0px; left:0px; }
+.street.horizontal .side { width:100%; height:49%; }
+.street.vertical .side { width:49%; height:100%; }
+.street.horizontal .right { top:49%; }
+.street.vertical .right { left:51%; }
+.street .lane { position:absolute; }
+.street.horizontal .lane { width:100%; height:48%; }
+.street.horizontal .lane2 { top:48%; }
+.street.vertical .lane { width:50%; height:100%; }
+.street.vertical .lane2 { left:50%; }
+
+#cars, .street_canvas, #frustrations { z-index:10; position:absolute; top:0px; left:0px; }
+#frustrations { z-index:13; }
+
+#amber { top:210px; left:0px; }
+#baker { top:510px; left:0px; }
+#chang { top:0px; left:250px; }
+#dexter { top:0px; left:650px; }
+
+#critical { z-index:13; position:absolute; top:0; left:0; width:1024px; height:768px; background:url(../images/critical.png); opacity:0; }
+
+.hitbox { position:absolute; background:#0fc; }
+
+.intersection { width:50px; height:50px; z-index:14; -webkit-tap-highlight-color: rgba(0,0,0,0) }
+.stoplight { position:absolute; top:0px; left:0px; width:100%; height:100%; z-index:3; background:url(../images/control_horizontal.png) no-repeat 50% 50%; opacity:0.7; -webkit-tap-highlight-color: rgba(0,0,0,0) }
+.stoplight.vertical { -webkit-transform:rotate(90deg) translateZ(0); -webkit-tap-highlight-color: rgba(0,0,0,0) }
+.explosion { position:absolute; z-index:13; background-image: url(../images/explosion.png); width:80px; height:80px; background-repeat:no-repeat; }
+.frustration { position:absolute; width:15px; height:15px; background-image: url(../images/frustration.png); z-index:9; }
+.frustration.major { background-image:url(../images/frustration_major.png); }
+#frustration_label { position:absolute; right:20px; bottom:25px; text-align:left; width:190px; font-size:12px; color:#fff; z-index:2; }
+#frustration { position:absolute; right:20px; bottom:20px; width:200px; height:20px; background:#690; overflow:hidden; }
+#frustration .bar { position:absolute; top:0; left:0; width:0; height:100%; background:#900; }
+
+.intersection.big .stoplight { top:0px; }
+.intersection.amber { top:210px; height:100px; }
+.intersection.baker { top:510px; height:50px; }
+.intersection.chang { left:250px; width:100px; }
+.intersection.dexter { left:650px; width:100px; }
+
+#overlay { background:rgba(0,0,0,0.7); position:absolute; top:0px; left:0px; width:100%; height:100%; z-index:19; }
+#overlay .overlay_inner { position:absolute; top:40%; left:30%; width:30%; padding:5% 10%; text-align:center; background:#fff; border-radius:10px; }
+#overlay .overlay_inner h1, #overlay .overlay_inner h2 { margin:0px; padding:0px; }
+
+.car.horizontal { width:40px; height:20px; }
+.car.vertical { width:20px; height:40px; }
+.car.blue.horizontal { background:url(../images/car2_l.png); }
+.car.blue.horizontal.right { background:url(../images/car2_r.png); }
+.car.blue.vertical { background:url(../images/car2_d.png); }
+.car.blue.vertical.right { background:url(../images/car2_u.png); }
+.car.yellow.horizontal { background:url(../images/taxi_l.png); }
+.car.yellow.horizontal.right { background:url(../images/taxi_r.png); }
+.car.yellow.vertical { background:url(../images/taxi_d.png); }
+.car.yellow.vertical.right { background:url(../images/taxi_u.png); }
