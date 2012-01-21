@@ -186,13 +186,13 @@ var SOUNDS = {
   ],
   horn_truck    : "horn_truck",
   countdown     : "countdown",
-  theme         : "bg",
+  theme         : "bg_23",
   explosion     : "explosion_short",
   frustration   : "frustration",
   arrived       : "kaching"
 };
 
-var SOUND_FORMATS = { web : "mp3", ios : "aifc" };
+var SOUND_FORMATS = { web : "mp3", ios : "wav" };
 
 var SOUND_SPRITE = "sprite01.mp3";
 

@@ -47,6 +47,8 @@ Game = {
   is_critical          : false,                  // if traffic condition is critical, we overlay the scary red borders on the screen
   critical_cars        : [],                     // cars that are about to end the game
 
+  show_arrived_score   : true,                   // show a little floating +score for every arrived car
+
   // cache of the images representing various levels of vehicular frustration
   frustration_assets   : [],
 
@@ -427,7 +429,11 @@ Game = {
               Game.sounds[new_k] = Game.sounds_dir + media + Game.sound_format;
             });
           } else {
-            Game.sounds[key] = Game.sounds_dir + media_or_arr + Game.sound_format;
+            if (key==='theme') {
+               Game.sounds[key] = new Media(Game.sounds_dir + media_or_arr + Game.sound_format);
+            } else {
+               Game.sounds[key] = Game.sounds_dir + media_or_arr + Game.sound_format;   
+            }
           }          
         });
         
@@ -682,7 +688,9 @@ Game = {
 
   start_streets : function(){
 
-    Game.play_sound_theme();
+    _.delay(function(){
+      Game.play_sound_theme();            
+    },2000);
 
     _.each(Game.streets,function(street){
       street.start();
@@ -809,8 +817,14 @@ Game = {
     
     if (Game.with_sound) {
       if (Game.with_phonegap_sound) {
+        if (loop) {
+          console.log('looping ' + sound);
+          Game.loop_sound(sound, volume);
+        } else {
+          PhoneGap.exec("SoundPlug.play", Game.sounds[sound]);
+        }
         console.log(Game.sounds[sound]);
-        PhoneGap.exec("SoundPlug.play", Game.sounds[sound]);
+        
       } else if (Game.with_sm2_sound) {
         if (loop) {
           Game.loop_sound(sound,volume);
@@ -825,12 +839,24 @@ Game = {
   },
 
   loop_sound : function(sound, volume) {
-    Game.sounds[sound].play({ 
-      volume   : volume,
-      onfinish : function(){
-        Game.loop_sound(sound, volume);
-      }
-    });
+    if (Game.with_phonegap_sound) {
+      
+      
+      console.log('playing ' + sound);
+      
+      Game.sounds[sound].play();
+      
+      Game.theme_timer = setInterval(function(){ Game.sounds[sound].play(); console.log('looping theme'); }, 23980);
+      
+    } else {
+      
+      Game.sounds[sound].play({ 
+                              volume   : volume,
+                              onfinish : function(){
+                              Game.loop_sound(sound, volume);
+                              }
+                              }); 
+    }
   },
 
   stop_sound : function(sound) {
@@ -838,13 +864,15 @@ Game = {
     if (Game.with_phonegap_sound) {
       // Game.sounds[sound].stop();
       // PhoneGap.exec("SoundPlug.stop");
+      clearInterval(Game.theme_timer);
+      Game.sounds[sound].stop()
 
     } else if (Game.with_sm2_sound) {
       Game.sounds[sound].stop();
 
     } else if (Game.with_jukebox_sound) {
       Game.jukebox.stop();
-      
+
     }
     
   },
@@ -854,6 +882,8 @@ Game = {
       _.each(Game.sounds,function(media, key) {
         Game.stop_sound(key);
       });
+      clearInterval(Game.theme_timer);
+      
     } else if (Game.with_sm2_sound) {
       soundManager.stopAll();
     } else if (Game.with_jukebox_sound) {
@@ -1488,11 +1518,12 @@ var Car = function(car_hash){
 
   this.change_speed = function(faster) {
     if (faster) {
-      if (Math.ceil(this.speed)+1 < Game.max_speed) {
-        this.speed += 2;
-      } else {
-        this.speed = Game.max_speed;
-      }
+      this.speed = Game.max_speed;
+      // if (Math.ceil(this.speed)+1 < Game.max_speed) {
+      //   this.speed += 2;
+      // } else {
+      //   this.speed = Game.max_speed;
+      // }
     } else if (!faster && Math.ceil(this.speed) > 2) {
       this.speed -= 1;
     }
@@ -1754,6 +1785,19 @@ var Car = function(car_hash){
 
     if (this.sound_loop) {
       this.sound_loop.stop();
+    }
+
+    if (Game.show_arrived_score) {
+      var cur_top  = this.orientation=='horizontal' ? ( this.lefthand ? this.street.top-20 : this.street.top+20 ) : ( this.lefthand ? this.street.height : this.street.top),
+          cur_left = this.orientation=='horizontal' ? ( this.lefthand ? this.street.left : this.street.width ) : ( this.lefthand ? this.street.left - 20 : this.street.left + 20),
+          end_top  = this.orientation=='horizontal' ? ( this.lefthand ?  "-=50" : "-=50" ) : ( this.lefthand ?  "-=50" : "+=50" ),
+          end_left = this.orientation=='horizontal' ? ( this.lefthand ?  "+=50" : "-=50" ) : ( this.lefthand ?  "-=50" : "+=50" );
+
+      $("<div class='car_score'></div>").
+        text("+" + this.score).
+        css({ top : cur_top, left : cur_left }).
+        animate({ top : end_top, left : end_left, opacity : 0 },{ duration : 2000, complete : function(){ $(this).remove(); } }).
+        appendTo(Game.dom);
     }
 
     Game.frustration -= this.frustration;

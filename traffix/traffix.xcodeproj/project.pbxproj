@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A00EF30114C3F3530015B00B /* SoundPlug.m in Sources */ = {isa = PBXBuildFile; fileRef = A00EF30014C3F3530015B00B /* SoundPlug.m */; };
-		A00EF30314C3F9410015B00B /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = A00EF30214C3F9410015B00B /* sounds */; };
+		A00EF30514C97D9D0015B00B /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = A00EF30414C97D9D0015B00B /* sounds */; };
 		A0B693EA14C30A6E002A33C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0B693E914C30A6E002A33C7 /* Foundation.framework */; };
 		A0B693EC14C30A6E002A33C7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0B693EB14C30A6E002A33C7 /* UIKit.framework */; };
 		A0B693EE14C30A6E002A33C7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0B693ED14C30A6E002A33C7 /* CoreGraphics.framework */; };
@@ -43,7 +43,7 @@
 /* Begin PBXFileReference section */
 		A00EF2FF14C3F3530015B00B /* SoundPlug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundPlug.h; path = Plugins/SoundPlug.h; sourceTree = "<group>"; };
 		A00EF30014C3F3530015B00B /* SoundPlug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SoundPlug.m; path = Plugins/SoundPlug.m; sourceTree = "<group>"; };
-		A00EF30214C3F9410015B00B /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sounds; path = www/sounds; sourceTree = "<group>"; };
+		A00EF30414C97D9D0015B00B /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sounds; path = www/sounds; sourceTree = "<group>"; };
 		A0B693E514C30A6E002A33C7 /* traffix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = traffix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0B693E914C30A6E002A33C7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A0B693EB14C30A6E002A33C7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -115,7 +115,7 @@
 		A0B693D714C30A6E002A33C7 = {
 			isa = PBXGroup;
 			children = (
-				A00EF30214C3F9410015B00B /* sounds */,
+				A00EF30414C97D9D0015B00B /* sounds */,
 				A0B6943614C30B49002A33C7 /* apple-touch-icon-m.png */,
 				A0B6943414C30B18002A33C7 /* www */,
 				A0B6943214C30A94002A33C7 /* Default-Landscape~ipad.png */,
@@ -311,7 +311,7 @@
 				A0B6943314C30A94002A33C7 /* Default-Landscape~ipad.png in Resources */,
 				A0B6943514C30B18002A33C7 /* www in Resources */,
 				A0B6943714C30B49002A33C7 /* apple-touch-icon-m.png in Resources */,
-				A00EF30314C3F9410015B00B /* sounds in Resources */,
+				A00EF30514C97D9D0015B00B /* sounds in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

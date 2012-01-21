@@ -34,7 +34,7 @@ h1, h2, p { color:#333; margin-bottom:0.5em;}
 h1 { font-size:64px; font-family: 'Fugaz One', Helvetica, sans-serif; letter-spacing:-2px; text-shadow:0 3px 8px #333; }
 h1.countdown { font-size:100px; }
 h2, h3, label, .bttn, #score, #high_score { font-size:24px; font-family: 'Boogaloo', Times, sans-serif; margin-bottom:20px; }
-p { line-height:1.5; font-family: 'Boogaloo', Times, sans-serif; }
+p, .car_score { line-height:1.5; font-family: 'Boogaloo', Times, sans-serif; }
 em { font-style:italic; }
 
 .screen { position:absolute; top:0; left:0; width:1024px; height:768px; display:none; overflow:hidden; /*background:#444 url(../images/bg.jpg);*/ }
@@ -78,7 +78,7 @@ a, #intro p strong { color:#fc0; }
 #game .bttn, #game #score, #game .high_score { text-shadow:3px 3px 3px #000; }
 .bttn.start_game, .bttn.restart { position:absolute; height:35px; padding:10px; margin-top:10px; margin:0 auto; text-align:center; color:#fff; text-indent:-2000px; height:90px; font-size:30px; cursor:pointer; }
 .bttn.start_game { bottom:30px; left:10px; width:200px; background:url(../images/bttn_play.png) no-repeat 0 0; -webkit-transform:rotate(-1deg); }
-.bttn.restart { background:url(../images/bttn_again.png) no-repeat 0 0; text-indent:-2000px; width:296px; display:none; top:370px; left:350px; -webkit-transform:rotate(2deg); }
+.bttn.restart { background:url(../images/bttn_again.png) no-repeat 0 0; text-indent:-2000px; width:200px; height:200px; display:none; top:400px; left:440px; -webkit-transform:rotate(2deg); }
 .bttn.credits, .bttn.leaderboards { font-size:16px; }
 .bttn.credits { bottom:0px; left:20px; }
 .bttn.leaderboards { bottom:0px; left:180px; }
@@ -173,3 +173,5 @@ a, #intro p strong { color:#fc0; }
 .car.yellow.horizontal.right { background:url(../images/taxi_r.png); }
 .car.yellow.vertical { background:url(../images/taxi_d.png); }
 .car.yellow.vertical.right { background:url(../images/taxi_u.png); }
+
+.car_score { font-size:20px; color:#fff; position:absolute; z-index:20; opacity : 1; color:#ff0; }
