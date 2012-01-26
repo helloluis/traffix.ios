@@ -19,7 +19,10 @@
 	<key>OpenAllWhitelistURLsInWebView</key>
 	<false/>
 	<key>ExternalHosts</key>
-	<array/>
+  <array>
+    <string>localhost</string>
+    <string>debug.phonegap.com</string>
+  </array>
 	<key>Plugins</key>
 	<dict>
 		<key>soundplug</key>

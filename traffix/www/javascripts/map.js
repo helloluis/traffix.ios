@@ -71,13 +71,13 @@ var BARRIERS = [
   ['baker_right_barrier2',  535, 637, 15, 25, 'horizontal', 'baker dexter',  false, "#aaa" ],
   ['baker_left_barrier1',   510, 347, 15, 25, 'horizontal', 'baker chang',   false, "#999" ],
   ['baker_left_barrier2',   510, 747, 15, 25, 'horizontal', 'baker dexter',  false, "#888" ],
-  ['chang_right_barrier1',  305, 310, 50, 15, 'horizontal', 'amber chang',   true,  "#999" ],
-  ['chang_right_barrier2',  555, 310, 50, 15, 'horizontal', 'baker chang',   true,  "#aaa" ],
-  ['chang_left_barrier1',   200, 253, 50, 15, 'horizontal', 'amber chang',   true,  "#bbb" ],
+  ['chang_right_barrier1',  308, 310, 50, 15, 'horizontal', 'amber chang',   true,  "#999" ],
+  ['chang_right_barrier2',  558, 310, 50, 15, 'horizontal', 'baker chang',   true,  "#aaa" ],
+  ['chang_left_barrier1',   195, 253, 50, 15, 'horizontal', 'amber chang',   true,  "#bbb" ],
   ['chang_left_barrier2',   497, 253, 50, 15, 'horizontal', 'baker chang',   true,  "#ccc" ],
-  ['dexter_right_barrier1', 305, 710, 50, 15, 'horizontal', 'amber dexter',  true,  "#ddd" ],
-  ['dexter_right_barrier2', 555, 710, 50, 15, 'horizontal', 'baker dexter',  true,  "#eee" ],
-  ['dexter_left_barrier1',  200, 655, 50, 15, 'horizontal', 'amber dexter',  true,  "#fff" ],
+  ['dexter_right_barrier1', 308, 710, 50, 15, 'horizontal', 'amber dexter',  true,  "#ddd" ],
+  ['dexter_right_barrier2', 558, 710, 50, 15, 'horizontal', 'baker dexter',  true,  "#eee" ],
+  ['dexter_left_barrier1',  195, 655, 50, 15, 'horizontal', 'amber dexter',  true,  "#fff" ],
   ['dexter_left_barrier2',  497, 655, 50, 15, 'horizontal', 'baker dexter',  true,  "#eee" ]
 ];
 
@@ -100,44 +100,51 @@ var INTERSECTIONS = [
   [ 'baker dexter', 512, 652, 95, 45 ],
 ];
 
-// we only need 30 fps coz we're third-world that way
-var FPS = 30;
+// we only need 24 fps coz we're third-world that way
+var FPS = 24;
 
 // once a Maker hits MAX_CARS_PER_STREET, it stops generating new cars until the user
-// has managed to remove some more. 8 is a purely arbitrary number.
-var MAX_CARS_PER_STREET = 10;
+// has managed to remove some more. 15 is a purely arbitrary number.
+var MAX_CARS_PER_STREET = 15;
 
-var MAX_SPEED = 6;
+// the maximum number of pixels a car moves forward per frame
+var MAX_SPEED = 8; 
 
-var MAKER_FREQUENCY = 5000;
+var MAKER_FREQUENCY = 4000;
 
 var IMAGES_DIR = "images/";
 
 // all car types
 var CARS = {
-  car         : { 
-    type      : 'car', 
-    width     : 20, 
-    height    : 40, 
-    frustrates_by : 6,
-    score     : 1,
-    assets    : [ 
-      // from right, from left, from top, from bottom
-      [ 'car2_r.png', 'car2_l.png', 'car2_d.png', 'car2_u.png' ], 
-      [ 'taxi_r.png', 'taxi_l.png', 'taxi_d.png', 'taxi_u.png' ], 
-    ]
-  },
-  hatch       : { type : 'hatch',     width : 20, height : 35, frustrates_by : 6, score : 1,
-      assets  : [ 'car1_r.png', 'car1_l.png', 'car1_d.png', 'car1_u.png' ] },
-  jeepney     : { type : 'jeepney',   width : 20, height : 45, frustrates_by : 5, score : 3,
-       assets : [ 'jeepney_r.png', 'jeepney_l.png', 'jeepney_d.png', 'jeepney_u.png' ] },
-  van         : { type : 'van',       width : 20, height : 45, frustrates_by : 4, score : 2,
-       assets : [ 'van_r.png', 'van_l.png', 'van_d.png', 'van_u.png' ] },
-  bus         : { type : 'bus',       width : 20, height : 60, frustrates_by : 3, score : 4,
-       assets : [ 'bus_r.png', 'bus_l.png', 'bus_d.png', 'bus_u.png' ] },
-  ambulance   : { type : 'ambulance', width : 20, height : 45, frustrates_by : 3, speed : 5, score : 5, 
-       assets : [ 'ambulance_r.png', 'ambulance_l.png', 'ambulance_d.png', 'ambulance_u.png' ],
-       sounds : [ 'ambulance.mp3' ] }
+  car               : { 
+      type          : 'car', 
+      width         : 20, 
+      height        : 40, 
+      frustrates_by : 6,
+      score         : 1,
+      assets        : [ 
+        [ 'car2_r.png', 'car2_l.png', 'car2_d.png', 'car2_u.png' ], 
+        [ 'taxi_r.png', 'taxi_l.png', 'taxi_d.png', 'taxi_u.png' ], 
+      ]
+    },
+  hatch           : { type : 'hatch',     width : 20, height : 35, frustrates_by : 6, score : 1,
+      assets      : [ 'car1_r.png', 'car1_l.png', 'car1_d.png', 'car1_u.png' ] 
+    },
+  jeepney         : { type : 'jeepney',   width : 20, height : 45, frustrates_by : 5, score : 3,
+      assets      : [ 'jeepney_r.png', 'jeepney_l.png', 'jeepney_d.png', 'jeepney_u.png' ] 
+    },
+  van             : { type : 'van',       width : 20, height : 45, frustrates_by : 4, score : 2,
+      assets      : [ 'van_r.png', 'van_l.png', 'van_d.png', 'van_u.png' ] 
+    },
+  bus             : { type : 'bus',       width : 20, height : 60, frustrates_by : 3, speed : 5, score : 4,
+      assets      : [ 'bus_r.png', 'bus_l.png', 'bus_d.png', 'bus_u.png' ] 
+    },
+  ambulance       : { type : 'ambulance', width : 20, height : 45, frustrates_by : 3, speed : 8, score : 5, 
+      assets      : [ 'ambulance_r_anim.png', 'ambulance_l_anim.png', 'ambulance_d_anim.png', 'ambulance_u_anim.png' ],
+      animate     : true,
+      animation   : { step : 12, frames : 4 },
+      sounds      : [ 'ambulance.mp3' ] 
+    }
 };
 
 var LOADING_CARS = [
@@ -160,14 +167,15 @@ var FRUSTRATIONS = [
 var CAR_ODDS = { 'car' : [1,40], 'hatch' : [41,60], 'van' : [61,75], 'jeepney' : [75,90], 'bus' : [91,99], 'ambulance' : [99,100] };
 
 // in order for the global car odds to go up, a player
-// has to hit a certain number of points. we start at 0.5,
+// has to hit a certain number of points. we start at 0.3,
 // in other words, a car is only half as likely to be spawned
 // as "normal".
 var CAR_ODD_LEVELS = [
-  [ 0,   0.3  ],
-  [ 30,  0.5  ],
-  [ 60,  0.7  ],
-  [ 100, 1.0  ]
+  [ 0,   0.3   ],
+  [ 30,  0.5   ],
+  [ 60,  0.7   ],
+  [ 100, 0.85  ],
+  [ 150, 1.0   ]
 ];
 
 var SOUNDS_DIR = "sounds/";
@@ -186,7 +194,7 @@ var SOUNDS = {
   ],
   horn_truck    : "horn_truck",
   countdown     : "countdown",
-  theme         : "bg_23",
+  theme         : "bg",
   explosion     : "explosion_short",
   frustration   : "frustration",
   arrived       : "kaching"
@@ -203,7 +211,7 @@ var SOUND_SPRITE_MAP = {
 };
 
 var NEIGHBORHOOD = [
-  "bg.jpg", "buildings.png"
+  "bg.jpg"
 ];
 
 var COLLISION_MESSAGES = [
@@ -235,9 +243,31 @@ var SUCCESS_MESSAGES = [
   "Awesome!",
   "Cool!",
   "Crazy!",
-  "Ikaw na!",
+  "Ikaw na! Ikaw na ang MMDA!",
   "Fantastic!",
   "You Don't Suck After All!"
 ];
 
-var OTHERS = ["bg_polaroid.png", "traffix_logo.png", "bttn_play.png", "bttn_again.png"];
+var OTHERS = [ "bg_polaroid.png", "traffix_logo.png", "bttn_play.png", "bttn_again.png", "explosion.png", "bg_help.jpg" ];
+
+var BOSSES = [
+  { time : 45,  score : 10, speed : 4, width : 20, height : 80,  assets : [ "boss_01_r.png", "boss_01_l.png", "boss_01_d.png", "boss_01_u.png" ] },
+  { time : 75,  score : 15, speed : 3, width : 20, height : 100, assets : [ "boss_02_r.png", "boss_02_l.png", "boss_02_d.png", "boss_02_u.png" ] },
+  { time : 105, score : 20, speed : 3, width : 20, height : 100, assets : [ "boss_02_r.png", "boss_02_l.png", "boss_02_d.png", "boss_02_u.png" ] },
+  { time : 135, score : 20, speed : 3, width : 20, height : 100, assets : [ "boss_02_r.png", "boss_02_l.png", "boss_02_d.png", "boss_02_u.png" ] },
+  { time : 165, score : 25, speed : 3, width : 20, height : 100, assets : [ "boss_02_r.png", "boss_02_l.png", "boss_02_d.png", "boss_02_u.png" ] },
+  { time : 195, score : 25, speed : 3, width : 20, height : 100, assets : [ "boss_02_r.png", "boss_02_l.png", "boss_02_d.png", "boss_02_u.png" ] },
+  { time : 225, score : 30, speed : 3, width : 20, height : 100, assets : [ "boss_02_r.png", "boss_02_l.png", "boss_02_d.png", "boss_02_u.png" ] },
+  { time : 255, score : 30, speed : 3, width : 20, height : 100, assets : [ "boss_02_r.png", "boss_02_l.png", "boss_02_d.png", "boss_02_u.png" ] }
+];
+
+// var BOSSES = [
+//   { time : 45,  score : 10, speed : 4, width : 20, height : 80,  assets : [ "boss_01_r.png", "boss_01_l.png", "boss_01_d.png", "boss_01_u.png" ] },
+//   { time : 75,  score : 15, speed : 3, width : 20, height : 100, assets : [ "boss_02_r.png", "boss_02_l.png", "boss_02_d.png", "boss_02_u.png" ] },
+//   { time : 105, score : 20, speed : 3, width : 20, height : 120, assets : [ "boss_03_r.png", "boss_03_l.png", "boss_03_d.png", "boss_03_u.png" ] },
+//   { time : 135, score : 25, speed : 3, width : 20, height : 150, assets : [ "boss_04_r.png", "boss_04_l.png", "boss_04_d.png", "boss_04_u.png" ] },
+//   { time : 165, score : 30, speed : 3, width : 20, height : 180, assets : [ "boss_05_r.png", "boss_05_l.png", "boss_05_d.png", "boss_05_u.png" ] },
+//   { time : 195, score : 30, speed : 3, width : 20, height : 180, assets : [ "boss_05_r.png", "boss_05_l.png", "boss_05_d.png", "boss_05_u.png" ] },
+//   { time : 225, score : 30, speed : 3, width : 20, height : 180, assets : [ "boss_05_r.png", "boss_05_l.png", "boss_05_d.png", "boss_05_u.png" ] },
+//   { time : 255, score : 30, speed : 3, width : 20, height : 180, assets : [ "boss_05_r.png", "boss_05_l.png", "boss_05_d.png", "boss_05_u.png" ] }
+// ];
