@@ -248,6 +248,7 @@ var SUCCESS_MESSAGES = [
   "You Don't Suck After All!"
 ];
 
+
 var OTHERS = [ "bg_polaroid.png", "traffix_logo.png", "bttn_play.png", "bttn_again.png", "explosion.png", "bg_help.jpg" ];
 
 var BOSSES = [

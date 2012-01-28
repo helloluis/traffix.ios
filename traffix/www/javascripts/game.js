@@ -97,13 +97,12 @@ Game = {
 
     Game.loader = new PxLoader();
 
-    Game.loading_screen = $("#loader"),
-        loader_percentage = $(".loading_percentage", Game.loading_screen);
+    Game.loading_screen = $("#loader");
 
-    Game.log("enable_preloading?", Game.enable_preloading);
+    var loader_percentage = $(".loading_percentage", Game.loading_screen);
 
     if (Game.enable_preloading) {
-
+      
       _.each(Game.car_types, function(car){
         _.each(_.flatten(car.assets),function(fc){
           var img = new PxLoaderImage(Game.images_dir + fc);
@@ -131,7 +130,7 @@ Game = {
           var img = new PxLoaderImage(Game.images_dir + ba);
           Game.loader.add(img);
         });
-      })
+      });
 
       loader_percentage.text("0%");
 
@@ -178,7 +177,6 @@ Game = {
 
     } else {
       
-      Game.loading_screen.remove();
       Game.initialize(auto_start);
 
     }
@@ -374,7 +372,6 @@ Game = {
         str+= arguments[i] + " ";
       }
       Game.debug_cont.append("<p>"+str+"</p>");
-    }
   },
 
   initialize_bosses : function(){
@@ -411,8 +408,6 @@ Game = {
         }
         
       }, 1000);
-
-      //console.log(Game.boss_timer);
 
     }
 
@@ -644,10 +639,9 @@ Game = {
     Game.log("initializing streets", STREETS.length);
 
     _.each( STREETS, function(street_data){
-      var street  = new Street(),
-          context = Game.car_context;
+      var street  = new Street();
 
-      street.initialize( Game, street_data, context );
+      street.initialize( Game, street_data, Game.car_context );
       Game.streets.push( street );
     });
     
@@ -704,7 +698,7 @@ Game = {
 
     // prevent gray overlay when tapping in iOS?
     $('body').live('touchstart', function(e){
-      if(e.target.localName != 'select'){
+      if(e.target.localName != 'select' && e.target.localName != 'h2'){
         e.preventDefault(); 
       }
     });
